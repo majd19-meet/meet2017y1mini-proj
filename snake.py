@@ -3,14 +3,33 @@ import random
 
 turtle.tracer(1,0)
 
-SIZE_X=800
-SIZE_Y=500
+SIZE_X=1000
+SIZE_Y=800
 turtle.setup(SIZE_X, SIZE_Y)
+
+turtle.pendown()
+
+draw=turtle.clone()
+
+draw.penup()
+draw.goto(398, 248)
+draw.pendown()
+draw.goto(-398, 248)
+draw.goto(-398, -248)
+draw.goto(398, -248)
+draw.goto(398,248)
+draw.penup()
+draw.hideturtle()
+
+box_size = 15
+#size_x=750
+#size_y=450
+
 
 turtle.penup()
 
 SQUARE_SIZE = 20
-START_LENGHT = 2
+START_LENGHT = 1
 
 pos_list = []
 stamp_list = []
@@ -129,8 +148,7 @@ def move_snake():
 
 
     global food_stamps, food_pos
-    if snake.pos() in food_pos:
-    #WHAT HAPPENS WHEN THE SNAKE EATS ITSELF        
+    if snake.pos() in food_pos:      
         food_ind=food_pos.index(snake.pos())
         food.clearstamp(food_stamps[food_ind])
         food_pos.pop(food_ind)
@@ -138,8 +156,6 @@ def move_snake():
         print ('You have eaten the food!')
         make_food()
     else:
-        #this is what happens when the snake doesn't eat food
-        print('I am moving')
         old_stamp = stamp_list.pop (0)
         snake.clearstamp(old_stamp)
         pos_list.pop(0)
@@ -155,7 +171,7 @@ def move_snake():
         quit()
     if new_y_pos <= DOWN_EDGE:
         print ('You hit the down edge! Game over!')
-
+        quit()
 
     if snake.pos() in pos_list[0:-1]:
         print('You hit yourself! Game over!')
